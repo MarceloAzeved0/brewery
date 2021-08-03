@@ -1,0 +1,39 @@
+@use "sass:math";
+
+@function strip-unit($int) {
+  @return math.div($int, ($int * 0 + 1));
+}
+
+@function rem($int) {
+  $size: strip-unit($int);
+  @return math.div($size, 16) * 1rem;
+}
+
+$fontsFiles: (
+  ("Roboto", "/fonts/Roboto-Regular", normal, normal, ''),
+  ("Roboto", "/fonts/Roboto-Medium", 500, normal, ''),
+  ("Roboto", "/fonts/Roboto-Bold", bold, normal, '')
+);
+
+$primaryFont: 'Roboto', sans-serif;
+
+/*
+  Map{
+    fontName: ($font-size, $font-weight, $line-height)
+  }
+*/
+$_fonts: (
+    title1: (rem(30), 400, rem(30)),
+
+    subtitle1: (rem(20), 400, rem(24)),
+    
+    body1: (rem(16), 400, rem(24)),
+);
+
+@mixin font($type) {
+  $content: map-get($_fonts, $type);
+
+  font-size: nth($content, 1);
+  font-weight: nth($content, 2);
+  line-height: nth($content, 3);
+}

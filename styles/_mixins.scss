@@ -1,0 +1,42 @@
+$grid-breakpoints: (
+  xs: 0px,
+  sm: 420px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  wd: 1440px
+);
+
+@function breakpoint-min($name) {
+  $min: map-get($grid-breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+@mixin breakpoint($nameMin, $nameMax: '') {
+  $min: breakpoint-min($nameMin);
+  $max: breakpoint-min($nameMax);
+
+  @if $min and $max {
+    @media (min-width: $min) and (max-width: $max - 1px) {
+      @content;
+    }
+  } @else if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin font-face($name, $font-files, $weight: false, $style: false, $version: '') {
+  @font-face {
+    font-family: $name;
+    font-weight: $weight;
+    font-style: $style;
+    font-display: swap;
+    src: url($font-files + ".woff" + $version) format('woff');
+    src: url($font-files + ".woff2" + $version) format('woff2'),
+        url($font-files + ".ttf" + $version) format('truetype');
+  }
+}
