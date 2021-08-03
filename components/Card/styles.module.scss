@@ -1,0 +1,74 @@
+@use '../../styles/globals/colors';
+@use '../../styles/globals/typography';
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 220px;
+  height: 220px;
+  border: 1px solid colors.$gray3;
+  border-radius: 3px;
+
+  -webkit-box-shadow: 5px 0px 15px 0px colors.$gray3; 
+  box-shadow: 5px 0px 15px 0px colors.$gray3;
+
+  &__title{
+    @include typography.font('title1');
+    margin-bottom: 15px;
+  }
+
+  &__address{
+    @include typography.font('body1');
+  }
+
+  &-line{
+    width: 100%;
+    color: colors.$gray3;
+  }
+
+  &_article{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  &-badge{
+    width: 50px;
+    height: 20px;
+    margin: 5px 0 5px 20px;
+    display: flex;
+    
+    align-items: center;
+
+    &__text{
+      border-radius: 3px;
+      @include typography.font('body5');
+      padding: 3px;
+
+      &--green{
+        background-color: colors.$green;
+        color: #fff;
+      }
+      &--yellow{
+        background-color: colors.$yellow;
+        color: #565656;
+      }
+      &--dark{
+        background-color: colors.$dark;
+        color: #fff;
+      }
+
+      &--blue{
+        background-color: colors.$blue;
+        color: #fff;
+      }
+      &--red{
+        background-color: colors.$red;
+        color: #fff;
+      }
+    }
+  }
+}

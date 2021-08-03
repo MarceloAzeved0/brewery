@@ -1,0 +1,51 @@
+@use "./colors";
+@use "./mixins";
+@use "./typography";
+
+@each $font in typography.$fontsFiles {
+  @include mixins.font-face(
+    nth($font, 1),
+    nth($font, 2),
+    nth($font, 3)
+  );
+}
+
+* {
+  font-family: typography.$primaryFont;
+  color: colors.$gray1;
+  scroll-behavior: smooth;
+  margin: 0;
+}
+
+button {
+  border: none;
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+$container-max-widths: (
+  sm: 400px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+);
+
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+
+  @each $breakpoint, $container-max-width in $container-max-widths {
+    @include mixins.breakpoint($breakpoint) {
+      max-width: $container-max-width;
+    }
+  }
+}
