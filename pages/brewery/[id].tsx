@@ -26,7 +26,7 @@ const Brewery: React.FC = () => {
 
   useEffect(() => {
     getBreweries(id)
-  }, [id])
+  }, [])
 
   return (
     <div>
