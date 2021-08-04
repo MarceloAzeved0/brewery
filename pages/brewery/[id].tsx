@@ -18,15 +18,17 @@ const Brewery: React.FC = () => {
 
   const router = useRouter()
   const { id } = router.query
-  
+
   async function getBreweries(id: string){
-    const data = await apiGetBreweryById(id)
-    setBrewery(data)
+    if(id){
+      const data = await apiGetBreweryById(id)
+      setBrewery(data)
+    }
   }
 
   useEffect(() => {
     getBreweries(id)
-  }, [])
+  }, [id])
 
   return (
     <div>
@@ -74,7 +76,7 @@ const Brewery: React.FC = () => {
         </p>
         <p>
           Open in maps: 
-            <a style={{textDecoration: 'underline', color: 'blue'}} href={`https://www.google.com.br/maps/@${brewery?.latitude},-${brewery?.longitude}z`}> 
+            <a style={{textDecoration: 'underline', color: 'blue'}} href={`https://www.google.com.br/maps/?q=${brewery?.latitude},${brewery?.longitude}`}> 
               {brewery?.latitude},{brewery?.longitude}
             </a>
         </p>
