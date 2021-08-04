@@ -19,7 +19,7 @@ const Brewery: React.FC = () => {
   const router = useRouter()
   const { id } = router.query
 
-  async function getBreweries(id: string){
+  async function getBreweries(id: any){
     if(id){
       const data = await apiGetBreweryById(id)
       setBrewery(data)

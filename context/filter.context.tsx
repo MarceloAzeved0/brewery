@@ -14,13 +14,25 @@ const FilterContext = createContext({} as FilterContextData)
 const FilterContextProvider: React.FC = ({ children }) => {
   const [ currentPage, setCurrentPage] = useState<number>(1)
   const [ filter, setFilter] = useState<string>('')
+
+
+  const setFilterPage = (value: string) => {
+    setFilter(value)
+    typeof(sessionStorage) !== 'undefined' && sessionStorage.setItem('filter', value);
+  }
+
+  const setPage = (value: number) => {
+    setCurrentPage(value)
+    typeof(sessionStorage) !== 'undefined' && sessionStorage.setItem('page', value.toString());
+  }
+
   return (
     <FilterContext.Provider
       value={{
         currentPage,
-        setCurrentPage,
+        setCurrentPage:setPage,
         filter,
-        setFilter
+        setFilter: setFilterPage
       }}
     >
       {children}

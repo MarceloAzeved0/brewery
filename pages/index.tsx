@@ -56,6 +56,18 @@ function Home() {
   }
 
   useEffect(() => {
+    if (window && sessionStorage.getItem('filter')) { 
+      setFilter(sessionStorage.getItem('filter'))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (window && sessionStorage.getItem('page')) { 
+      setCurrentPage(parseInt(sessionStorage.getItem('page')))
+    }
+  }, [])
+
+  useEffect(() => {
     getBreweries()
   }, [filter, currentPage])
 
