@@ -12,3 +12,15 @@ export const apiGetBreweries = async (filter:String, page: Number) => {
     console.error(err);
   }
 };
+
+export const apiGetBreweryById = async (id: string)=> {
+  const url = `/breweries/${id}`;
+
+  try {
+    const { data } = await api.get(url);
+    return data;
+
+  } catch (err) {
+    console.error(err);
+  }
+}

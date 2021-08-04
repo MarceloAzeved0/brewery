@@ -8,6 +8,8 @@ export interface CardProps {
   title: string;
   description: string;
   badge: Badge
+  href: string | undefined;
+  country: string | undefined;
 }
 
 

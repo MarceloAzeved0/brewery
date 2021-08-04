@@ -1,0 +1,14 @@
+@use '../globals/colors';
+@use '../../styles/globals/typography';
+
+.brewery-detail {
+  -webkit-box-shadow: 5px 0px 15px 0px colors.$gray3; 
+  box-shadow: 5px 0px 15px 0px colors.$gray3;
+
+  padding: 20px;
+
+  h3 {
+    @include typography.font('title2');
+    margin: 20px 0;
+  }
+}

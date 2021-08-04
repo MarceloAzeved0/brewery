@@ -1,15 +1,18 @@
 import Head from 'next/head'
 import Card from '../components/Card'
 import Button from '../components/Button'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { FilterContext } from '../context/filter.context'
 
 import { apiGetBreweries } from '../services/api/brewery'
 import classnames from 'classnames/bind'
 import styles from '../styles/pages/index.module.scss'
 
 const cn = classnames.bind(styles)
-interface IBrewery{
+export interface IBrewery{
   id: number;
   name: string;
   brewery_type: string;
@@ -32,8 +35,7 @@ interface IBrewery{
 export default 
 function Home() {
   const [ breweries, setBreweries] = useState<IBrewery[]>([])
-  const [ currentPage, setCurrentPage] = useState<Number>(1)
-  const [ filter, setFilter] = useState<string>('')
+  const { filter, setFilter, currentPage, setCurrentPage } = useContext(FilterContext)
   
   const byTypes = [
     'micro',
@@ -66,12 +68,7 @@ function Home() {
       </Head>
 
      <main className={cn('breweries')}>
-      <header className={cn('breweries__header')}>
-        <div className={cn('container', 'breweries__header--texts')}>
-          <h1>Breweries</h1>
-          <p>A breweries list by Open Brewery DB</p>
-        </div>
-      </header>
+      <Header />
       <div className={cn('container')}>
         <label style={{ marginRight: '20px' }} htmlFor="TypeID">Filter</label>
         <select value={filter} onChange={(e) => setFilter(e.target.value) } id="TypeID">
@@ -85,13 +82,17 @@ function Home() {
       </div>
 
       <section className={cn('container', 'breweries-list-cards')}>
-      { breweries.length > 0 ?
+      { breweries && breweries.length > 0 ?
         breweries.map(brewery => (
-          <Card key={brewery.id} 
-              title={brewery.name} 
-              address={brewery.address_2} 
-              description={`${brewery.county_province} - ${brewery.phone}`} 
-              badge={{ type: brewery.brewery_type, name:  brewery.brewery_type}} />
+          <Card 
+            href={`/brewery/${brewery.id}`}
+            key={brewery.id} 
+            title={brewery.name} 
+            address={`${brewery.street || ''}`} 
+            description={`${brewery.city || ''} ${brewery.county_province || ''} - ${brewery.postal_code || ''}`} 
+            country={brewery.country}
+            badge={{ type: brewery.brewery_type, name:  brewery.brewery_type}} 
+          />
         ))
           : <strong>no results</strong>
       }
@@ -102,11 +103,7 @@ function Home() {
         <Button theme={currentPage === 2 ? 'active' : 'inactive'} onClick={() => setCurrentPage(2)} type="button">2</Button>
         <Button theme={currentPage === 3 ? 'active' : 'inactive'} onClick={() => setCurrentPage(3)} type="button">3</Button>
       </div>
-      <footer className={cn('breweries__footer')}>
-          <p>
-            Breweries List
-          </p>
-      </footer>
+      <Footer />
       </main>
     </div>
   )

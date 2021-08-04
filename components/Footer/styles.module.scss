@@ -1,0 +1,21 @@
+@use '../../styles/globals/colors';
+@use '../../styles/globals/typography';
+
+.footer{
+  clear: both;
+  position: relative;
+  height: 200px;
+  margin-top: -200px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: colors.$gray4;
+  height: 200px;
+  margin-top: 20px;
+
+
+  p {
+    @include typography.font('footer');
+  }
+}

@@ -1,5 +1,6 @@
 @use '../globals/colors';
 @use '../../styles/globals/typography';
+@use '../../styles/globals/mixins';
 
 .breweries {
   display: flex;
@@ -7,17 +8,6 @@
   flex: 1;
   min-height: 100vh;
 
-  &__header{
-    background-color: #323131;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-
-    &--texts > * {
-      color: #fff;
-    }
-  }
   &-buttons{
     display: flex;
     width: 100%;
@@ -27,32 +17,18 @@
     margin-top: 20px;
   }
 
-  &__footer{
-    clear: both;
-    position: relative;
-    height: 200px;
-    margin-top: -200px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: colors.$gray4;
-    height: 200px;
-    margin-top: 20px;
-
-
-    p {
-      @include typography.font('footer');
-    }
-  }
-
   &-list-cards {
     display: flex;
     flex: 1;
     width: 100%;
     display: inline-flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
     margin-top: 20px;
+
+    @include mixins.breakpoint(md) {
+      justify-content: flex-start;
+    }
   }
 }

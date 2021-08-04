@@ -6,7 +6,7 @@ import styles from './styles.module.scss'
 import classnames from 'classnames/bind'
 const cn = classnames.bind(styles)
 
-const Card: React.FC<CardProps> = ({title, address, description, badge}) => {
+const Card: React.FC<CardProps> = ({ country, href, title, address, description, badge}) => {
   const badgeColor = {
     micro: 'green',
     brewpub: 'yellow',
@@ -16,16 +16,19 @@ const Card: React.FC<CardProps> = ({title, address, description, badge}) => {
   }
 
   return (
-    <div className={cn('card')}>
+    <a href={href} className={cn('card')}>
       <article className={cn('card_article')}>
         <p className={cn('card__title')}>
           {title}
         </p>
-        <address className={cn('card__adresss')}>
+        <p className={cn('card__adresss')}>
           {address}
-        </address>
+        </p>
         <p className={cn('card__description')}>
           {description}
+        </p>
+        <p className={cn('card__description')}>
+          {country}
         </p>
         </article>
       <hr className={cn('card-line')}/>
@@ -34,7 +37,7 @@ const Card: React.FC<CardProps> = ({title, address, description, badge}) => {
           {badge.name}
         </p>
       </div>
-    </div>
+    </a>
   )
 }
 
