@@ -1,5 +1,9 @@
 ## Breweries
 
+Listar rede de cerverjarias do Open Brewery DB.
+### Deploy
+
+https://vercel-3ne8heffi-test-bernardy.vercel.app/
 ### Tarefas
 
 As seguintes tarefas foram realizadas para o projeto:
@@ -33,6 +37,8 @@ yarn start
 ```
 
 <img src="./assets/metrics.png" alt="Métricas">
+
+
 
 
 
